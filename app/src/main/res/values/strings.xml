@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinRetrofit</string>
+    <string name="cantac_empty_message">No se encontraron contactos</string>
+</resources>
