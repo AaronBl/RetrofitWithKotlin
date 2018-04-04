@@ -7,6 +7,27 @@
     tools:context=".MainActivity"
     android:id="@+id/main_container"
     >
+<EditText
+    android:id="@+id/et_filter"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    android:inputType="textPersonName"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:hint="Filtar contactos"
+    />
+    <ToggleButton
+        android:id="@+id/toggle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textOff="Hombres"
+        android:textOn="Mujeres"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_filter"
+        />
+
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/empty_message_container"
@@ -17,7 +38,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toggle">
+
+
 
         <TextView
             android:id="@+id/text_view_empty_message"
@@ -51,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toggle">
 
 
         <android.support.v7.widget.RecyclerView
@@ -59,8 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/contacts_layout_item"
-        >
+            tools:listitem="@layout/contacts_layout_item">
+
         </android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>

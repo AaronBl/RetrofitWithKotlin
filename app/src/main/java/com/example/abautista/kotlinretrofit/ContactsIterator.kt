@@ -12,9 +12,9 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
         ServiceGenerator.retrofit.create(ContactService::class.java)
     }
 
-    fun getContacts(numberOfContacts: Int){
+    fun getContacts(numberOfContacts: Int, gender:String = ""){
 
-        this.contactsServices.getContacts(numberOfContacts)
+        this.contactsServices.getContacts(numberOfContacts,gender)
                 .enqueue(object : RetrofitCallback<ResultResponse<Contact>>(){
                     override fun onResponseSuccess(response: ResultResponse<Contact>) {
                         contactsCallBack.onGetContatcsResponse(response.results)
@@ -24,5 +24,34 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
                         contactsCallBack.onError(apiError)
                     }
                 })
+    }
+
+   /* fun filterContacByGender(gender:String){
+        this.contactsServices.filterContactsByGender(gender)
+                .enqueue(object : RetrofitCallback<ResultResponse<Contact>>(){
+                    override fun onResponseSuccess(response: ResultResponse<Contact>) {
+                        contactsCallBack.onGetContatcsResponse(response.results)
+                    }
+                    override fun onError(apiError: ApiError) {
+                        contactsCallBack.onError(apiError)
+                    }
+                })
+    }*/
+
+    fun filterContacts(query: String, contact: List<Contact>){
+
+        if (query.isBlank()){
+            contactsCallBack.onFilterContexCompleted(contact)
+
+        }else{
+
+            val filteredContacts = contact.filter { contact ->
+                contact.name?.fullName?.contains(query,true) ?:false }
+
+               contactsCallBack.onFilterContexCompleted(filteredContacts)
+
+        }
+
+
     }
 }

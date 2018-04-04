@@ -6,4 +6,6 @@ interface ContactsCallBack: BaseCallback {
 
     fun onGetContatcsResponse(Contacts: List<Contact>)
 
+    fun onFilterContexCompleted(contacts: List<Contact>)
+
 }

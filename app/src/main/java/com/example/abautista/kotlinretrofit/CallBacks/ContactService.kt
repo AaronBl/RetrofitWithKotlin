@@ -9,5 +9,6 @@ import retrofit2.http.Query
 interface ContactService {
 
     @GET("api/")
-    fun getContacts(@Query("results") numberOfResult: Int) : Call<ResultResponse<Contact>>
+    fun getContacts(@Query("results") numberOfResult: Int,
+                    @Query("gender") gender: String) : Call<ResultResponse<Contact>>
 }
