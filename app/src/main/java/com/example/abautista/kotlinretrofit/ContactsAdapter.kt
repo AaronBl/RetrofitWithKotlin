@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.abautista.kotlinretrofit.Models.Contact
 import de.hdodenhof.circleimageview.CircleImageView
@@ -44,4 +45,3 @@ class ContactsAdapter (private val context: Context, private  val contacts: Muta
         val cellPhoneTextView: TextView? =itemView?.findViewById(R.id.text_view_cellphone)
     }
 }
-

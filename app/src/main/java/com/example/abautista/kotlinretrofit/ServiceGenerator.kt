@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
 
-    private const val BASE_URL: String = "http://randomuser.me/"
+    private const val BASE_URL: String = "https://randomuser.me/"
 
 
     private val okHttpClientBuilder = OkHttpClient.Builder()
