@@ -5,4 +5,5 @@ import com.example.abautista.kotlinretrofit.Models.ApiError
 interface BaseCallback {
 
     fun onError(apiError: ApiError)
+
 }

@@ -1,6 +1,7 @@
 package com.example.abautista.kotlinretrofit
 
-import android.provider.ContactsContract
+
+import android.util.Log
 import com.example.abautista.kotlinretrofit.CallBacks.ContactService
 import com.example.abautista.kotlinretrofit.CallBacks.ContactsCallBack
 import com.example.abautista.kotlinretrofit.Models.ApiError
@@ -13,12 +14,13 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
         ServiceGenerator.retrofit.create(ContactService::class.java)
     }
 
-    fun getContacts(numberOfContacts: Int){
+    fun getContacts(numberOfContacts: Int, gender: String=""){
 
-        this.contactsServices.getContacts(numberOfContacts)
+        this.contactsServices.getContacts(numberOfContacts,gender)
                 .enqueue(object : RetrofitCallback<resultResponse<Contact>>(){
                     override fun onResponseSuccess(response: resultResponse<Contact>) {
                         contactsCallBack.onGetContatcsResponse(response.results)
+                        Log.e("","")
                     }
 
                     override fun onError(apiError: ApiError) {
@@ -26,4 +28,17 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
                     }
                 })
     }
+
+    fun filterContacts(query: String, contacts: List<Contact>){
+        if(query.isBlank()){
+            contactsCallBack.filterContactsComplete(contacts)
+        }else{
+            val filteredContacts=contacts.filter { contact->contact.name?.fullName?.contains(query,true)?: false }
+            contactsCallBack.filterContactsComplete(filteredContacts)
+        }
+
+    }
+
+
+
 }

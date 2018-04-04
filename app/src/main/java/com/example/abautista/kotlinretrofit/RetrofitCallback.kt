@@ -1,9 +1,10 @@
 package com.example.abautista.kotlinretrofit
 
-import android.support.design.widget.BaseTransientBottomBar
+
 import com.example.abautista.kotlinretrofit.CallBacks.BaseCallback
 import com.example.abautista.kotlinretrofit.Models.ApiError
 import okhttp3.ResponseBody
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Converter
@@ -23,7 +24,7 @@ abstract class RetrofitCallback<T> : Callback<T>, BaseCallback {
             } else {
                 this.onError(ApiError( "The request body is null"))
             }
-        } else {
+        }else {
             this.handleErrorResponse(response, this)
         }
     }

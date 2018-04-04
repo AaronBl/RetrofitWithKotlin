@@ -5,4 +5,5 @@ import com.example.abautista.kotlinretrofit.Models.ApiError
 interface BaseViewModel {
 
     fun displayApiError(apiError: ApiError)
+
 }

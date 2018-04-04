@@ -8,25 +8,26 @@ import com.example.abautista.kotlinretrofit.ViewModels.ContactsViewModel
 
 class ContactsPresenter(private val contactsViewModel: ContactsViewModel): ContactsCallBack{
 
+
     private val iterator: ContactsIterator by lazy { ContactsIterator(this) }
 
     private var contacts: List<Contact> = emptyList()
 
-    fun updateContacts(numbreOfContacts: Int){
+    fun updateContacts(numbreOfContacts: Int,gender: String){
         this.contactsViewModel.setProgressVisibility(
                 View.VISIBLE,
                 View.INVISIBLE,
                 View.VISIBLE)
-        this.iterator.getContacts(numbreOfContacts)
+        this.iterator.getContacts(numbreOfContacts,gender)
     }
 
-    fun refreshContacts(numbreOfContacts: Int){
+    fun refreshContacts(numbreOfContacts: Int,gender: String=""){
         this.contactsViewModel.setProgressVisibility(
                 View.INVISIBLE,
                 View.INVISIBLE,
                 View.VISIBLE)
 
-        this.iterator.getContacts(numbreOfContacts)
+        this.iterator.getContacts(numbreOfContacts,gender)
     }
 
 
@@ -48,5 +49,14 @@ class ContactsPresenter(private val contactsViewModel: ContactsViewModel): Conta
         this.contactsViewModel.setRefreshing(false)
         this.contactsViewModel.displayApiError(apiError)
     }
+
+    fun filterContacts(query: String){
+        this.iterator.filterContacts(query,this.contacts)
+    }
+
+    override fun filterContactsComplete(contact: List<Contact>) {
+        this.contactsViewModel.displayContacts(contact)
+    }
+
 
 }
