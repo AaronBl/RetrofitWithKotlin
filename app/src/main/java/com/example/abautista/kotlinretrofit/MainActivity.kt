@@ -1,10 +1,15 @@
 package com.example.abautista.kotlinretrofit
 
+import android.app.SearchManager
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.SearchView
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+
 import com.example.abautista.kotlinretrofit.Models.ApiError
 import com.example.abautista.kotlinretrofit.Models.Contact
 import com.example.abautista.kotlinretrofit.ViewModels.ContactsViewModel
@@ -41,7 +46,7 @@ class MainActivity : AppCompatActivity(), ContactsViewModel {
             }
         }
         
-        this.text_filter.addTextChangedListener(object: TextWatcher{
+       /* this.text_filter.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 
             }
@@ -54,10 +59,33 @@ class MainActivity : AppCompatActivity(), ContactsViewModel {
                 presenter.filterContacts(text_filter.text.toString().trim())
             }
 
-        })
+        })*/
 
 
         this.presenter.updateContacts(30,"")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menuInflater.inflate(R.menu.main,menu)
+        val searchManager=getSystemService(Context.SEARCH_SERVICE) as? SearchManager
+        val searchView=menu?.findItem(R.id.search)?.actionView as? SearchView
+        searchView?.setSearchableInfo(searchManager?.getSearchableInfo(componentName))
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val newQuery=query?:""
+                presenter.filterContacts(newQuery)
+                return newQuery.isNotBlank()
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val query=newText?: ""
+                presenter.filterContacts(query)
+                return query.isNotBlank()
+            }
+
+        })
+        return true
+
     }
 
     override fun setProgressVisibility(progressVisibility: Int, emptyMessage: Int, listVisibility: Int) {
