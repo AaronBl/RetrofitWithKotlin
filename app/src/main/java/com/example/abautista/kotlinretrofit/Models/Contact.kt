@@ -7,10 +7,8 @@ data class Contact(@SerializedName("name") val name: Name?,
                    @SerializedName("cell") private val _cell: String?,
                    @SerializedName("picture") val picture: Picture?) {
 
-    val email: String
-        get()=this._email ?: ""
-    val cell: String
-        get()=this._cell?: ""
+    val email: String get()=this._email ?: ""
+    val cell: String get()=this._cell?: ""
 
     data class Name(@SerializedName("title") private val _title: String?,
                     @SerializedName("first") private val _first: String?,

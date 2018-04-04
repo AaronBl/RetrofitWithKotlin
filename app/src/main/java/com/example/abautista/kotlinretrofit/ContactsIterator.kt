@@ -1,11 +1,10 @@
 package com.example.abautista.kotlinretrofit
 
-import android.provider.ContactsContract
 import com.example.abautista.kotlinretrofit.CallBacks.ContactService
 import com.example.abautista.kotlinretrofit.CallBacks.ContactsCallBack
 import com.example.abautista.kotlinretrofit.Models.ApiError
 import com.example.abautista.kotlinretrofit.Models.Contact
-import com.example.abautista.kotlinretrofit.Models.resultResponse
+import com.example.abautista.kotlinretrofit.Models.ResultResponse
 
 class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
 
@@ -16,8 +15,8 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
     fun getContacts(numberOfContacts: Int){
 
         this.contactsServices.getContacts(numberOfContacts)
-                .enqueue(object : RetrofitCallback<resultResponse<Contact>>(){
-                    override fun onResponseSuccess(response: resultResponse<Contact>) {
+                .enqueue(object : RetrofitCallback<ResultResponse<Contact>>(){
+                    override fun onResponseSuccess(response: ResultResponse<Contact>) {
                         contactsCallBack.onGetContatcsResponse(response.results)
                     }
 
