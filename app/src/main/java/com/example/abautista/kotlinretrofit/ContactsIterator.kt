@@ -33,7 +33,6 @@ class ContactsIterator(private val contactsCallBack: ContactsCallBack) {
         if(query.isBlank()){
             contactsCallBack.filterContactsComplete(contacts)
         }else{
-
             val filteredContacts=contacts.filter { contact->
                 val name =contact.name?.fullName?: ""
                 val email=contact.email
